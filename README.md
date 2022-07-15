@@ -18,4 +18,4 @@ next patient according to the specs number<br>
 ![next](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/hopitalsys%20(3).png)<br><br>
 
 
-[2-Library System ](https://github.com/SaadMu7ammad/Cpp_Mostafa_Saad_course/blob/main/02%20Project-LibrarySystem.cpp)
+[2-Library System ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/HospitalSystem.cpp)
