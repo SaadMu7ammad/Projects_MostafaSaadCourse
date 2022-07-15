@@ -20,3 +20,12 @@ next patient according to the specs number<br>
 
 [2-b) Library System_explain ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(0).png)<br><br>
 [2-b) Library System_code ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/HospitalSystem.cpp)
+adding<br>
+![adding](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(01).png)<br>
+Printing the Books added <br>
+![printing](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(02).png)<br>
+searching by prefix of book names<br>
+![searching](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(03).png)<br><br>
+the quantity of the book to borrow is finished so the user cant borrow right now till another return a copy of the book <br>
+![searching](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(04).png)<br><br>
+
