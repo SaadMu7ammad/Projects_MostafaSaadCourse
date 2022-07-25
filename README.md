@@ -18,7 +18,7 @@ next patient according to the specs number<br>
 ![next](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/hopitalsys%20(3).png)<br><br>
 
 
-[2-b) Library System_explain ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(0).png)<br><br>
+[2-a) Library System_explain ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(0).png)<br><br>
 [2-b) Library System_code ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/HospitalSystem.cpp)<br><br>
 adding<br>
 ![adding](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(01).png)<br>
@@ -29,3 +29,5 @@ searching by prefix of book names<br>
 the quantity of the book to borrow is finished so the user cant borrow right now till another return a copy of the book <br>
 ![no quantity](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(04).png)<br><br>
 
+[3-a) -- ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(0).png)<br><br>
+[3-b) Ask_fm(Q&A)_code ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/Ask.fmQ%26A.cpp)<br><br>
