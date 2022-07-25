@@ -1,0 +1,29 @@
+1
+22 math1 1
+1
+1 arabic 6
+1
+20 zoo 2
+4
+6
+100
+saad
+6
+150
+seif
+7
+seif
+zoo 20
+7
+saad
+math1
+22
+7
+seif
+math1
+22
+8
+seif
+zoo
+20
+4
