@@ -29,5 +29,5 @@ searching by prefix of book names<br>
 the quantity of the book to borrow is finished so the user cant borrow right now till another return a copy of the book <br>
 ![no quantity](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(04).png)<br><br>
 
-[3-a) -- ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/LibrarySystem%20(0).png)<br><br>
-[3-b) Ask_fm(Q&A)_code ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/Ask.fmQ%26A.cpp)<br><br>
+[3&4-a)Ask_fm(Q&A)_explain](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/Ask.fmQ%26A/Ask.fmQ%26A%20(00).png)<br><br>
+[3&4-b) Ask_fm(Q&A)_code ](https://github.com/SaadMu7ammad/Projects_MostafaSaadCourse/blob/main/Ask.fmQ%26A.cpp)<br><br>
