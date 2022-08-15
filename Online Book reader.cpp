@@ -1,12 +1,9 @@
 #include <iostream>
 #include<algorithm>
 #include<vector>
-#include<bits/stdc++.h>
-#include<ctime> 
+#include<map> 
 #pragma warning(disable : 4996)
 using namespace std;
-int CurrentId;
-string CurrentName;
 const std::string currentDateTime() {
 	time_t now = time(0);
 	struct tm tstruct;
@@ -81,9 +78,9 @@ private:
 	string ISBN;
 	string Title;
 	string Author_Name;
-	int pages = 0;
-	int idBook = 0;
-public :
+	int pages=0;
+	int idBook=0;
+public:
 	static int LenBooks;
 	string get_ISBN() {
 		return ISBN;
@@ -118,58 +115,63 @@ public :
 };
 int Book::LenBooks = 0;
 struct All_Books {
-	Book bk[1000];
-	map<string, pair<int, vector<string>>>contentBooks; //NameBook >>id  Content of each page
+	Book bk;
+	map<string,pair<int,vector<string>>>contentBooks; //NameBook >>id  Content of each page
+	map<string, Book>allbooks; //NameBook >>id  Content of each page
 	void addBook() {
 		string ISBN;
 		string Title;
 		string Author_Name;
 		int pages;
 		cout << "Enter ISBN:";
-		cin >> ISBN;
-		bk[bk->LenBooks].set_ISBN( ISBN);
+		cin >>ISBN;
+		bk.set_ISBN(ISBN);
 		cout << "Enter Title:";
 		cin >> Title;
-		bk[bk->LenBooks].set_Title( Title);
+		bk.set_Title(Title);
 		cout << "Enter Author Name:";
-		cin >> Author_Name;
-		bk[bk->LenBooks].set_Author_Name ( Author_Name);
+		cin >>Author_Name;
+		bk.set_Author_Name (Author_Name);
 		cout << "How Many Pages:";
 		cin >> pages;
-		bk[bk->LenBooks].set_pages( pages);
-		contentBooks[Title].first = bk->LenBooks;
+		bk.set_pages(pages);
+		allbooks[bk.get_Title()]= bk;
+		contentBooks[bk.get_Title()].first = Book::LenBooks;
 		for (int i = 0; i < pages; i++) {
 			cout << "Enter Content Of Page " << i + 1 << ": ";
 			string cnt; cin >> cnt;
-			contentBooks[Title].second.push_back(cnt);
+			contentBooks[bk.get_Title()].second.push_back(cnt);
 		}
-		++(bk->LenBooks);
+		++(Book::LenBooks);
 	}
 	void all_books() {
 		for (auto& it : contentBooks) {
 			cout << "Num of pages: " << contentBooks[it.first].second.size() << "\n";
 			cout << contentBooks[it.first].first << ") Book Title: " << it.first << "\n";
+		} 
+	}
+	void content_books(string name) {
+		cout << "Num of pages: " << contentBooks[name].second.size() << "\n";
+		for (auto& it : contentBooks[name].second) {
 			int i = 1;
-			for (auto& it2 : contentBooks[it.first].second) {
-				cout << "Page " << i++ << " : " << it2 << "\n";
-			}
+				cout << "Page " << i++ << " : " << it << "\n";
 		}
 	}
-};
+};All_Books all;
 struct admin {
-private:
-	int id_admin = 0;
+protected:
+	int id = 0;
 	string admin_name;
 	string pass;
 	string name;
 	string email;
 public:
-	static int adminLen;
+	static int Len;
 	int get_id_admin() {
-		return id_admin;
+		return id;
 	}
 	void set_id_admin(int id_admin) {
-		this->id_admin = id_admin;
+		this->id = id_admin;
 	}
 	string get_admin_name() {
 		return admin_name;
@@ -195,49 +197,50 @@ public:
 	void set_email(string email) {
 		this->email = email;
 	}
-	void print_admin() {
+	void print() {
 		cout << "admin:\n";
 		cout << "Name :" << name << endl;
 		cout << "Email :" << email << endl;
 		cout << "admin_name :" << admin_name << endl;
 	}
-};
-int admin::adminLen = 0;
-admin ad[1000];  //each admin has a 
-All_Books all;
+};	
+int admin::Len = 0;
 struct admin_process {
 public:
+	map <string,admin>alladmins;
 	void sign_up_admin() {
+		admin ad;
 		cout << "*) admin name:\n";
 		string adName; cin >> adName;
-		 ad[ad->adminLen].set_admin_name(adName);
+		 ad.set_admin_name(adName);
 		cout << "*) Password:\n";
 		string ps; cin >> ps;
-		ad[ad->adminLen].set_pass(ps);
+		ad.set_pass(ps);
 		cout << "*) Name:\n";
 		string nm; cin >> nm;
-		 ad[ad->adminLen].set_name(nm);
+		 ad.set_name(nm);
 		cout << "*) email:\n";
 		string mail; cin >> mail;
-		 ad[ad->adminLen].set_email(mail);
-		CurrentId = ad->adminLen;
-		CurrentName = ad[ad->adminLen].get_admin_name();
-		ad[ad->adminLen].set_id_admin( ad->adminLen);
-		++(ad->adminLen);
+		 ad.set_email(mail);
+		ad.set_id_admin( admin::Len);
+		alladmins[adName] = ad;
+		++(admin::Len);
 	}
 	void login_admin() {
+		admin  ad;
 		cout << "Enter admin_name: ";
 		string admin_name; cin >> admin_name;
 		cout << "Enter password: ";
 		string pass; cin >> pass;
 		if (checker_admins(admin_name, pass)) {
-			menu_login_admin();
+			 ad =alladmins[admin_name] ;
+			menu_login_admin(ad);
 		}
 		else {
 			cout << "Not Correct\n";
 		}
 	}
-	void menu_login_admin() {
+	void menu_login_admin(admin &ad) {
 		while (true) {
 			cout << "1)View Profile: \n";
 			cout << "2)Add a Book \n";
@@ -251,7 +254,7 @@ public:
 			}
 			else {
 				if (choose == 1) {
-					ad[CurrentId].print_admin();
+					ad.print();
 				}
 				else if (choose == 2) {
 					all.addBook();
@@ -269,63 +272,24 @@ public:
 		}
 	}
 	bool checker_admins(string admin_name, string pass) {
-		for (int i = 0; i < ad->adminLen; i++) {
-			if (ad[i].get_admin_name() == admin_name && ad[i].get_pass() == pass) {
+		for (auto& it : alladmins) {
+			if (it.first == admin_name && alladmins[it.first].get_pass() == pass) {
 				cout << "ADMIN:\n";
-				cout << "Hello " << ad[i].get_name() << endl;
+				cout << "Hello " <<it.first << endl;
 				return true;
 			}
 		}
 		return false;
 	}
 };
-struct user {
-private:
-int id_user = 0;
-	string user_name;
-	string pass;
-	string name;
-	string email;
-public:
-	int get_id_user() {
-		return id_user;
-	}
-	void set_id_user(int id_user) {
-		this->id_user = id_user;
-	}
-	string get_user_name() {
-		return user_name;
-	}
-	void set_user_name(string user_name) {
-		this->user_name = user_name;
-	}
-	string get_pass() {
-		return pass;
-	}
-	void set_pass(string pass) {
-		this->pass = pass;
-	}
-	void set_name(string name) {
-		this->name = name;
-	}
-	string get_name() {
-		return name;
-	}
-	string get_email() {
-		return email;
-	}
-	void set_email(string email) {
-		this->email = email;
-	}
-	static int userLen;
+struct user:public admin {
+public:	
 	map<string, pair<int, string>>reading_list;//name Book and markStop and date
-	vector<pair<string, string>>history_user;
-	map<string, pair<int, string>>mark;
 	void print_user() {
 		cout << "User:\n";
 		cout << "Name :" << name << endl;
 		cout << "Email :" << email << endl;
-		cout << "user_name :" << user_name << endl;
+		cout << "user_name :" << get_name() << endl;
 	}
 	void history() {
 		for (auto& it : reading_list) {
@@ -357,47 +321,45 @@ public:
 			}
 		}
 	}
-};
-int user::userLen = 0;
-user usr[1000];  //each user can access the all books to read
+};	
 struct user_process {
 public:
+	map<string, user>allusers;
+	bool checker_user(string user_name, string pass) {
+		for (auto& it : allusers) {
+			if (it.first == user_name && allusers[it.first].get_pass() == pass) {
+				cout << "USER:\n";
+				cout << "Hello " << it.first << endl;
+				return true;
+			}
+		}
+		return false;
+	}
 	void sign_up_user() {
+		user usr;
 		cout << "*) user name:\n";
 		string us; cin >> us;
-		usr[usr->userLen].set_user_name(us);
+		usr.set_admin_name(us);
 		cout << "*) Password:\n";
 		string ps; cin >> ps;
-		 usr[usr->userLen].set_pass(ps);
+		usr.set_pass(ps);
 		cout << "*) Name:\n";
 		string nm; cin >> nm;
-		 usr[usr->userLen].set_name(nm);
+		 usr.set_name(nm);
 		cout << "*) email:\n";
 		string mail; cin >> mail;
-		 usr[usr->userLen].set_email(mail);
-		CurrentId = usr->userLen;
-		CurrentName = usr[usr->userLen].get_user_name();
-		usr[usr->userLen].set_id_user ( usr->userLen);
-		++(usr->userLen);
+		 usr.set_email(mail);
+		usr.set_id_admin(admin::Len);
+		allusers[us] = usr;
+		++(admin::Len);
 	}
-	void login_user() {
-		cout << "Enter user_name: ";
-		string user_name; cin >> user_name;
-		cout << "Enter password: ";
-		string pass; cin >> pass;
-		if (checker_user(user_name, pass)) {
-			menu_login_user();
-		}
-		else {
-			cout << "Not Correct\n";
-		}
-	}
-	void menu_login_user() {
+	void menu_login_user(user& usr) {
 		while (true) {
 			cout << "1)View Profile: \n";
 			cout << "2)Reading History: \n";
 			cout << "3)Choose a Book \n";
 			cout << "4)LogOut \n";
+			cout << "5)Content of a Book \n";
 			int choose; cin >> choose;
 			if (cin.fail()) {
 				cin.clear();
@@ -406,44 +368,44 @@ public:
 			}
 			else {
 				if (choose == 1) {
-					usr[CurrentId].print_user();
+					usr.print_user();
 				}
 				else if (choose == 2) {
-					usr[CurrentId].history();
+					usr.history();
 				}
 				else if (choose == 3) {
 					all.all_books();
 					cout << "Choose a Book ID : ";
 					int _choose; cin >> _choose;
-					pair<string, int> bk_info = usr[CurrentId].choose_book(_choose);//name and pages tot
+					pair<string, int> bk_info = usr.choose_book(_choose);//name and pages tot
 					if (bk_info.first == "null") {
 						cout << "NOT FOUND\n";
 					}
 					else {
-						usr[CurrentId].content_page(_choose, usr[CurrentId].reading_list[bk_info.first].first);
-						if (usr[CurrentId].reading_list[bk_info.first].first)cout << "Current Page: " << usr[CurrentId].reading_list[bk_info.first].first << "\n";
+						usr.content_page(_choose, usr.reading_list[bk_info.first].first);
+						if (usr.reading_list[bk_info.first].first)cout << "Current Page: " << usr.reading_list[bk_info.first].first << "\n";
 						while (true) {
 							int ch = menu_ReadingBook();
 							if (ch == 1) {//next
-								if (usr[CurrentId].reading_list[bk_info.first].first < bk_info.second) {
-									usr[CurrentId].reading_list[bk_info.first].first++;//name and tot pages
-									usr[CurrentId].content_page(_choose, usr[CurrentId].reading_list[bk_info.first].first);
+								if (usr.reading_list[bk_info.first].first < bk_info.second) {
+									usr.reading_list[bk_info.first].first++;//name and tot pages
+									usr.content_page(_choose, usr.reading_list[bk_info.first].first);
 								}
 								else {
 									cout << "No found \n";
 								}
 							}
 							else if (ch == 2) {//prev
-								if (usr[CurrentId].reading_list[bk_info.first].first > 1) {
-									usr[CurrentId].reading_list[bk_info.first].first--;//name and tot pages
-									usr[CurrentId].content_page(_choose, usr[CurrentId].reading_list[bk_info.first].first);
+								if (usr.reading_list[bk_info.first].first > 1) {
+									usr.reading_list[bk_info.first].first--;//name and tot pages
+									usr.content_page(_choose, usr.reading_list[bk_info.first].first);
 								}
 								else {
 									cout << "No found \n";
 								}
 							}
 							else if (ch == 3) {
-								usr[CurrentId].reading_list[bk_info.first].second = currentDateTime();
+								usr.reading_list[bk_info.first].second = currentDateTime();
 								break;
 							}
 						}
@@ -452,28 +414,36 @@ public:
 				else if (choose == 4) {
 					break;
 				}
+				else if (choose == 5) {
+					all.all_books();
+					cout << "enter book name: ";
+					string name; cin >> name;
+					all.content_books(name);
+				}
 				else {
 					cout << "Not valid input \n";
 				}
 			}
 		}
 	}
-	bool checker_user(string user_name, string pass) {
-		for (int i = 0; i < usr->userLen; i++) {
-			if (usr[i].get_user_name() == user_name && usr[i].get_pass() == pass) {
-				cout << "USER:\n";
-				cout << "Hello " << usr[i].get_name() << endl;
-				CurrentId = usr[i].get_id_user();
-				return true;
-			}
+	void login_user() {
+		user usr;
+		cout << "Enter user_name: ";
+		string user_name; cin >> user_name;
+		cout << "Enter password: ";
+		string pass; cin >> pass;
+		if (checker_user(user_name, pass)) {
+			
+			menu_login_user(allusers[user_name]);
 		}
-		return false;
+		else {
+			cout << "Not Correct\n";
+		}
 	}
 };
-int main()
-{
+int main() {
 	admin_process admin;
-	user_process user;
+	user_process user; 
 	while (true) {
 		int choice = system();
 		if (choice == 1) {
@@ -495,5 +465,5 @@ int main()
 			}
 		}
 	}
-	return 0;
+		return 0;
 }
