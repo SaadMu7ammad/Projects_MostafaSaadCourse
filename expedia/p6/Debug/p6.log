@@ -1,0 +1,8 @@
+﻿  p6.cpp
+C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\p6\p6.cpp(181,45): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\p6\p6.cpp(196,44): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\p6\p6.cpp(310,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\p6\p6.cpp(338,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\p6\p6.cpp(557,55): warning C4018: '<': signed/unsigned mismatch
+C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\p6\p6.cpp(569,55): warning C4018: '<': signed/unsigned mismatch
+  p6.vcxproj -> C:\Users\sa'ad\C++\cpp_mostafa_saad\p6\Debug\p6.exe
